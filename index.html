@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Whisper Speech to Text</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Transformers.js + Whisper</p>
+            <h1>Chuyển âm thanh thành văn bản</h1>
+          </div>
+          <div class="status-pill" id="runtimeStatus">Chưa tải model</div>
+        </header>
+
+        <div class="controls-grid">
+          <section class="panel">
+            <h2>Nguồn âm thanh</h2>
+            <label class="drop-zone" for="audioFile" id="dropZone">
+              <input id="audioFile" type="file" accept="audio/*,video/*" />
+              <span class="drop-title">Chọn hoặc thả file audio/video</span>
+              <span class="drop-subtitle" id="fileName">Hỗ trợ mp3, wav, m4a, webm, mp4...</span>
+            </label>
+
+            <div class="recorder-row">
+              <button id="recordButton" class="secondary-button" type="button">Ghi âm</button>
+              <span id="recordingStatus" class="muted">Mic sẵn sàng</span>
+            </div>
+
+            <audio id="audioPreview" controls></audio>
+          </section>
+
+          <section class="panel">
+            <h2>Cấu hình</h2>
+            <label>
+              Model Whisper
+              <select id="modelSelect">
+                <option value="Xenova/whisper-tiny">whisper-tiny đa ngôn ngữ</option>
+                <option value="Xenova/whisper-base">whisper-base đa ngôn ngữ</option>
+                <option value="Xenova/whisper-small">whisper-small đa ngôn ngữ</option>
+                <option value="Xenova/whisper-tiny.en">whisper-tiny.en tiếng Anh</option>
+                <option value="Xenova/whisper-base.en">whisper-base.en tiếng Anh</option>
+              </select>
+            </label>
+
+            <label>
+              Ngôn ngữ
+              <select id="languageSelect">
+                <option value="vi">Tiếng Việt</option>
+                <option value="en">Tiếng Anh</option>
+                <option value="">Tự nhận diện</option>
+              </select>
+            </label>
+
+            <label class="checkbox-row">
+              <input id="useWebGPU" type="checkbox" />
+              <span>Dùng WebGPU nếu trình duyệt hỗ trợ</span>
+            </label>
+
+            <button id="transcribeButton" class="primary-button" type="button" disabled>
+              Chuyển thành text
+            </button>
+          </section>
+        </div>
+
+        <section class="result-panel">
+          <div class="result-header">
+            <h2>Kết quả</h2>
+            <div class="result-actions">
+              <button id="copyButton" class="icon-button" type="button" title="Sao chép" disabled>Sao chép</button>
+              <button id="clearButton" class="icon-button" type="button" title="Xóa">Xóa</button>
+            </div>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+          <textarea id="resultText" placeholder="Văn bản nhận dạng sẽ xuất hiện ở đây..."></textarea>
+        </section>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
